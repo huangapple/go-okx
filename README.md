@@ -23,6 +23,7 @@ import (
 	"log"
 
 	"github.com/huangapple/go-okx/rest"
+	"github.com/huangapple/go-okx/common"
 	"github.com/huangapple/go-okx/rest/api/account"
 )
 
@@ -31,7 +32,7 @@ func main() {
 	client := rest.New("", auth, nil)
 	param := &account.GetBalanceParam{}
 	req, resp := account.NewGetBalance(param)
-	if err := client.Do(req, resp); err != nil {
+	if err := client.Do2(req, resp); err != nil {
 		panic(err)
 	}
 	log.Println(req, resp.(*account.GetBalanceResponse))
@@ -50,13 +51,13 @@ import (
 )
 
 func main() {
-	handler := func(c public.EventTickers) {
+	handler := func(c interface{}) {
 		log.Println(c)
 	}
 	handlerError := func(err error) {
 		panic(err)
 	}
-	if err := public.SubscribeTickers("BTC-USDT", handler, handlerError, false); err != nil {
+	if _, err := public.SubscribeTickers("BTC-USDT", handler, handlerError, false); err != nil {
 		panic(err)
 	}
 	select {}
