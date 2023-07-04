@@ -2,6 +2,7 @@ package private
 
 import (
 	"encoding/json"
+	"github.com/gorilla/websocket"
 
 	"github.com/huangapple/go-okx/common"
 	"github.com/huangapple/go-okx/ws"
@@ -42,7 +43,7 @@ type PosData struct {
 }
 
 // default subscribe
-func SubscribeBalanceAndPosition(auth common.Auth, handler HandlerBalanceAndPosition, handlerError ws.HandlerError) error {
+func SubscribeBalanceAndPosition(auth common.Auth, handler HandlerBalanceAndPosition, handlerError ws.HandlerError) (*websocket.Conn, error) {
 	args := &ws.Args{
 		Channel: "balance_and_position",
 	}

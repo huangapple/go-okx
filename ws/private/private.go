@@ -24,7 +24,7 @@ func NewPrivate(auth common.Auth) *Private {
 }
 
 // subscribe
-func (p *Private) Subscribe(args interface{}, handler ws.Handler, handlerError ws.HandlerError) error {
+func (p *Private) Subscribe(args interface{}, handler ws.Handler, handlerError ws.HandlerError) (*websocket.Conn, error) {
 	subscribe := ws.NewOperateSubscribe(args, handler, handlerError)
 	return p.C.Operate(subscribe, p.Login)
 }
