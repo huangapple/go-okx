@@ -5,7 +5,7 @@ golang sdk for https://www.okx.com/docs-v5
 
 go get：
 ```shell
-go get github.com/iaping/go-okx
+go get github.com/huangapple/go-okx
 ```
 
 ## Example
@@ -18,8 +18,8 @@ package main
 import (
 	"log"
 
-	"github.com/iaping/go-okx/rest"
-	"github.com/iaping/go-okx/rest/api/account"
+	"github.com/huangapple/go-okx/rest"
+	"github.com/huangapple/go-okx/rest/api/account"
 )
 
 func main() {
@@ -41,7 +41,7 @@ package main
 import (
 	"log"
 
-	"github.com/iaping/go-okx/ws/public"
+	"github.com/huangapple/go-okx/ws/public"
 )
 
 func main() {
@@ -65,9 +65,9 @@ package main
 import (
 	"log"
 
-	"github.com/iaping/go-okx/common"
-	"github.com/iaping/go-okx/ws"
-	"github.com/iaping/go-okx/ws/private"
+	"github.com/huangapple/go-okx/common"
+	"github.com/huangapple/go-okx/ws"
+	"github.com/huangapple/go-okx/ws/private"
 )
 
 func main() {
