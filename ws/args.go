@@ -6,10 +6,11 @@ type Args struct {
 	Channel    string `json:"channel"`
 	InstId     string `json:"instId,omitempty"`
 	InstType   string `json:"instType,omitempty"`
-	InstFamily string `json:"instFamily,omitempty"`
+	InstFamily string `json:"InstFamily,omitempty"`
 	Uly        string `json:"uly,omitempty"`
 }
 
+// 登录参数, 用于身份验证
 type ArgsLogin struct {
 	ApiKey     string `json:"apiKey"`
 	Passphrase string `json:"passphrase"`

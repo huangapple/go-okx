@@ -3,8 +3,12 @@ package public
 import (
 	"encoding/json"
 
+	"github.com/gorilla/websocket"
 	"github.com/huangapple/go-okx/ws"
 )
+
+// 交易频道
+// 获取最近的成交数据，有成交数据就推送，每次推送仅包含一条成交数据。
 
 type HandlerTrades func(EventTrades)
 
@@ -23,7 +27,7 @@ type Trade struct {
 }
 
 // default subscribe
-func SubscribeTrades(instId string, handler HandlerTrades, handlerError ws.HandlerError, simulated bool) error {
+func SubscribeTrades(instId string, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
 	args := &ws.Args{
 		Channel: "trades",
 		InstId:  instId,

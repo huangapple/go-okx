@@ -3,8 +3,12 @@ package public
 import (
 	"encoding/json"
 
+	"github.com/gorilla/websocket"
 	"github.com/huangapple/go-okx/ws"
 )
+
+// 期权定价频道
+// 获取所有期权合约详细定价信息，一次性推送所有
 
 type HandlerOptSummary func(EventOptSummary)
 
@@ -35,7 +39,7 @@ type OptSummary struct {
 }
 
 // default subscribe
-func SubscribeOptSummary(instFamily string, handler HandlerOptSummary, handlerError ws.HandlerError, simulated bool) error {
+func SubscribeOptSummary(instFamily string, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
 	args := &ws.Args{
 		Channel:    "opt-summary",
 		InstFamily: instFamily,

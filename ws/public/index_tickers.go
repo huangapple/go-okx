@@ -3,8 +3,12 @@ package public
 import (
 	"encoding/json"
 
+	"github.com/gorilla/websocket"
 	"github.com/huangapple/go-okx/ws"
 )
+
+// 指数行情频道
+// 获取指数的行情数据。每100ms有变化就推送一次数据，否则一分钟推一次。
 
 type HandlerIndexTickers func(EventIndexTickers)
 
@@ -25,7 +29,7 @@ type IndexTickers struct {
 }
 
 // default subscribe
-func SubscribeIndexTickers(instId string, handler HandlerIndexTickers, handlerError ws.HandlerError, simulated bool) error {
+func SubscribeIndexTickers(instId string, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
 	args := &ws.Args{
 		Channel: "index-tickers",
 		InstId:  instId,

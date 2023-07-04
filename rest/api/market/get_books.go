@@ -2,6 +2,9 @@ package market
 
 import "github.com/huangapple/go-okx/rest/api"
 
+const GetBooksLimitNumPerSec = 10
+const GetBooksLimitRule = "IP"
+
 func NewGetBooks(param *GetBooksParam) (api.IRequest, api.IResponse) {
 	return &api.Request{
 		Path:   "/api/v5/market/books",
@@ -15,13 +18,15 @@ type GetBooksParam struct {
 	Sz     string `url:"sz,omitempty"`
 }
 
-type GetBooksResponse struct {
-	api.Response
-	Data []Book `json:"data"`
-}
-
-type Book struct {
+type BooksData struct {
 	Asks [][]string `json:"asks"`
 	Bids [][]string `json:"bids"`
 	Ts   int64      `json:"ts,string"`
+}
+
+// 获取产品深度
+// 获取产品深度列表(订单列表)
+type GetBooksResponse struct {
+	api.Response
+	Data []BooksData `json:"data"`
 }

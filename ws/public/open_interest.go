@@ -3,8 +3,12 @@ package public
 import (
 	"encoding/json"
 
+	"github.com/gorilla/websocket"
 	"github.com/huangapple/go-okx/ws"
 )
+
+// 持仓总量频道
+// 获取持仓总量，每3s有数据更新推送一次数据
 
 type HandlerOpenInterest func(EventOpenInterest)
 
@@ -22,7 +26,7 @@ type OpenInterest struct {
 }
 
 // default subscribe
-func SubscribeOpenInterest(instId string, handler HandlerOpenInterest, handlerError ws.HandlerError, simulated bool) error {
+func SubscribeOpenInterest(instId string, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
 	args := &ws.Args{
 		Channel: "open-interest",
 		InstId:  instId,

@@ -1,6 +1,11 @@
 package market
 
-import "github.com/huangapple/go-okx/rest/api"
+import (
+	"github.com/huangapple/go-okx/rest/api"
+)
+
+const GetTradesLimitNumPerSec = 50
+const GetTradesLimitRule = "IP"
 
 func NewGetTrades(param *GetTradesParam) (api.IRequest, api.IResponse) {
 	return &api.Request{
@@ -12,19 +17,19 @@ func NewGetTrades(param *GetTradesParam) (api.IRequest, api.IResponse) {
 
 type GetTradesParam struct {
 	InstId string `url:"instId"`
-	Limit  int    `url:"limit,omitempty"`
+	Limit  string `url:"limit"` // 分页返回的结果集数量, 最大为500, 默认100
 }
 
 type GetTradesResponse struct {
 	api.Response
-	Data []Trade `json:"data"`
+	Data []TradesData `json:"data"`
 }
 
-type Trade struct {
-	InstId  string `json:"instId"`
-	TradeId string `json:"tradeId"`
-	Px      string `json:"px"`
-	Sz      string `json:"sz"`
-	Side    string `json:"side"`
-	Ts      int64  `json:"ts,string"`
+type TradesData struct {
+	InstId  string `json:"instId"`  // 产品ID
+	TradeId string `json:"tradeId"` //成交ID
+	Px      string `json:"px"`      //成交价格
+	Sz      string `json:"sz"`      //成交数量
+	Side    string `json:"side"`    // 成交方向: buy; sell
+	Ts      string `json:"ts"`      // 成交时间
 }

@@ -3,8 +3,12 @@ package public
 import (
 	"encoding/json"
 
+	"github.com/gorilla/websocket"
 	"github.com/huangapple/go-okx/ws"
 )
+
+// 资金费率频道
+// 获取永续合约资金费率，30秒到90秒内推送一次数据
 
 type HandlerFundingRate func(EventFundingRate)
 
@@ -23,7 +27,7 @@ type FundingRate struct {
 }
 
 // default subscribe
-func SubscribeFundingRate(instId string, handler HandlerFundingRate, handlerError ws.HandlerError, simulated bool) error {
+func SubscribeFundingRate(instId string, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
 	args := &ws.Args{
 		Channel: "funding-rate",
 		InstId:  instId,

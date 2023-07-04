@@ -2,6 +2,13 @@ package trade
 
 import "github.com/huangapple/go-okx/rest/api"
 
+const PostOrderLimitNumPerSec = 30
+
+// Special_1:
+// 衍生品：UserID + (instrumentType + underlying)
+// 币币和币币杠杆：UserID + instrumentID
+const PostOrderLimitRule = "Special_1"
+
 func NewPostOrder(param *PostOrderParam) (api.IRequest, api.IResponse) {
 	return &api.Request{
 		Path:   "/api/v5/trade/order",
@@ -25,15 +32,15 @@ type PostOrderParam struct {
 	TgtCcy     string `json:"tgtCcy,omitempty"`
 }
 
+// 下单
+// 只有当您的账户有足够的资金才能下单。
 type PostOrderResponse struct {
 	api.Response
-	Data []PostOrder `json:"data"`
-}
-
-type PostOrder struct {
-	OrdId   string `json:"ordId"`
-	ClOrdId string `json:"clOrdId"`
-	Tag     string `json:"tag"`
-	SCode   string `json:"sCode"`
-	SMsg    string `json:"sMsg"`
+	Data []struct {
+		OrdId   string `json:"ordId"`
+		ClOrdId string `json:"clOrdId"`
+		Tag     string `json:"tag"`
+		SCode   string `json:"sCode"`
+		SMsg    string `json:"sMsg"`
+	} `json:"data"`
 }

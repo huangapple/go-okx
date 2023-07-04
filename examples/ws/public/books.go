@@ -12,13 +12,13 @@ func main() {
 		Channel: "books5",
 		InstId:  "BTC-USDT",
 	}
-	handler := func(c public.EventBooks) {
+	handler := func(c interface{}) {
 		log.Println(c)
 	}
 	handlerError := func(err error) {
 		panic(err)
 	}
-	if err := public.SubscribeBooks(args, handler, handlerError, false); err != nil {
+	if _, err := public.SubscribeBooks(args, handler, handlerError, false); err != nil {
 		panic(err)
 	}
 	select {}

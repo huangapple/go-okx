@@ -3,8 +3,12 @@ package public
 import (
 	"encoding/json"
 
+	"github.com/gorilla/websocket"
 	"github.com/huangapple/go-okx/ws"
 )
+
+// 标记价格频道
+// 获取标记价格，标记价格有变化时，每200ms推送一次数据，标记价格没变化时，每10s推送一次数据
 
 type HandlerMarkPrice func(EventMarkPrice)
 
@@ -21,7 +25,7 @@ type MarkPrice struct {
 }
 
 // default subscribe
-func SubscribeMarkPrice(instId string, handler HandlerMarkPrice, handlerError ws.HandlerError, simulated bool) error {
+func SubscribeMarkPrice(instId string, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
 	args := &ws.Args{
 		Channel: "mark-price",
 		InstId:  instId,

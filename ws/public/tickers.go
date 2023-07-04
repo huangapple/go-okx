@@ -3,8 +3,13 @@ package public
 import (
 	"encoding/json"
 
+	"github.com/gorilla/websocket"
 	"github.com/huangapple/go-okx/ws"
 )
+
+// 行情频道
+// 获取产品的最新成交价、买一价、卖一价和24小时交易量等信息。
+// 最快100ms推送一次，没有触发事件时不推送，触发推送的事件有：成交、买一卖一发生变动。
 
 type HandlerTickers func(EventTickers)
 
@@ -33,7 +38,7 @@ type Ticker struct {
 }
 
 // default subscribe
-func SubscribeTickers(instId string, handler HandlerTickers, handlerError ws.HandlerError, simulated bool) error {
+func SubscribeTickers(instId string, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
 	args := &ws.Args{
 		Channel: "tickers",
 		InstId:  instId,

@@ -3,8 +3,12 @@ package public
 import (
 	"encoding/json"
 
+	"github.com/gorilla/websocket"
 	"github.com/huangapple/go-okx/ws"
 )
+
+// 限价频道
+// 获取衍生品交易的最高买价和最低卖价。限价有变化时，每5秒推送一次数据，限价没变化时，不推送数据
 
 type HandlerPriceLimit func(EventPriceLimit)
 
@@ -21,7 +25,7 @@ type PriceLimit struct {
 }
 
 // default subscribe
-func SubscribePriceLimit(instId string, handler HandlerPriceLimit, handlerError ws.HandlerError, simulated bool) error {
+func SubscribePriceLimit(instId string, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
 	args := &ws.Args{
 		Channel: "price-limit",
 		InstId:  instId,
