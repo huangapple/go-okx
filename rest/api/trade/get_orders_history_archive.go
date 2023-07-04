@@ -4,7 +4,7 @@ import (
 	"github.com/huangapple/go-okx/rest/api"
 )
 
-func NewGetOrdersHistoryArchive(param *GetOrdersQueryParam) (api.IRequest, api.IResponse) {
+func NewGetOrdersHistoryArchive(param *GetOrderParam) (api.IRequest, api.IResponse) {
 	return &api.Request{
 		Path:   "/api/v5/trade/orders-history-archive",
 		Method: api.MethodGet,
