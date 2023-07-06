@@ -20,7 +20,13 @@ func NewPublic(simulated bool) *Public {
 }
 
 // subscribe
-func (p *Public) Subscribe(args interface{}, handler ws.Handler, handlerError ws.HandlerError) (*websocket.Conn, error) {
-	subscribe := ws.NewOperateSubscribe(args, handler, handlerError)
+func (p *Public) Subscribe(args []*ws.Args, handler ws.Handler, handlerError ws.HandlerError) (*websocket.Conn, error) {
+
+	tempArr := make([]interface{}, len(args))
+	for i := range args {
+		tempArr[i] = args[i]
+	}
+
+	subscribe := ws.NewOperateSubscribe(tempArr, handler, handlerError)
 	return p.C.Operate(subscribe, nil)
 }

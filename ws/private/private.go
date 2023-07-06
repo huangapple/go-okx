@@ -7,12 +7,12 @@ import (
 )
 
 type Private struct {
-	Auth common.Auth
+	Auth *common.Auth
 	C    *ws.Client
 }
 
 // new Private
-func NewPrivate(auth common.Auth) *Private {
+func NewPrivate(auth *common.Auth) *Private {
 	private := &Private{
 		Auth: auth,
 		C:    ws.DefaultClientPrivate,
@@ -25,7 +25,7 @@ func NewPrivate(auth common.Auth) *Private {
 
 // subscribe
 func (p *Private) Subscribe(args interface{}, handler ws.Handler, handlerError ws.HandlerError) (*websocket.Conn, error) {
-	subscribe := ws.NewOperateSubscribe(args, handler, handlerError)
+	subscribe := ws.NewOperateSubscribe([]interface{}{args}, handler, handlerError)
 	return p.C.Operate(subscribe, p.Login)
 }
 

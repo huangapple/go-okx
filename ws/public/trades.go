@@ -28,10 +28,10 @@ type Trade struct {
 
 // default subscribe
 func SubscribeTrades(instId string, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
-	args := &ws.Args{
+	args := []*ws.Args{{
 		Channel: "trades",
 		InstId:  instId,
-	}
+	}}
 
 	h := func(message []byte) {
 		var event EventTrades

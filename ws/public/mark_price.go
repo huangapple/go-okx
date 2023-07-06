@@ -26,9 +26,11 @@ type MarkPrice struct {
 
 // default subscribe
 func SubscribeMarkPrice(instId string, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
-	args := &ws.Args{
-		Channel: "mark-price",
-		InstId:  instId,
+	args := []*ws.Args{
+		{
+			Channel: "mark-price",
+			InstId:  instId,
+		},
 	}
 
 	h := func(message []byte) {

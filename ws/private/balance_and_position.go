@@ -43,7 +43,7 @@ type PosData struct {
 }
 
 // default subscribe
-func SubscribeBalanceAndPosition(auth common.Auth, handler HandlerBalanceAndPosition, handlerError ws.HandlerError) (*websocket.Conn, error) {
+func SubscribeBalanceAndPosition(auth *common.Auth, handler HandlerBalanceAndPosition, handlerError ws.HandlerError) (*websocket.Conn, error) {
 	args := &ws.Args{
 		Channel: "balance_and_position",
 	}

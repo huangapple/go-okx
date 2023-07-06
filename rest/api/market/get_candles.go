@@ -21,7 +21,7 @@ type GetCandlesParam struct {
 	Limit  int    `url:"limit,omitempty"`
 }
 
-// 获取交易产品K线数据
+// GetCandlesResponse 获取交易产品K线数据
 // 获取K线数据。K线数据按请求的粒度分组返回，K线数据每个粒度最多可获取最近1,440条。
 type GetCandlesResponse struct {
 	api.Response

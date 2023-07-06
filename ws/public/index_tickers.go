@@ -30,10 +30,10 @@ type IndexTickers struct {
 
 // default subscribe
 func SubscribeIndexTickers(instId string, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
-	args := &ws.Args{
+	args := []*ws.Args{{
 		Channel: "index-tickers",
 		InstId:  instId,
-	}
+	}}
 
 	h := func(message []byte) {
 		var event EventIndexTickers

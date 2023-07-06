@@ -28,10 +28,10 @@ type FundingRate struct {
 
 // default subscribe
 func SubscribeFundingRate(instId string, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
-	args := &ws.Args{
+	args := []*ws.Args{{
 		Channel: "funding-rate",
 		InstId:  instId,
-	}
+	}}
 
 	h := func(message []byte) {
 		var event EventFundingRate

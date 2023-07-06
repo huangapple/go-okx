@@ -12,8 +12,8 @@ import (
 type HandlerOrders func(EventOrders)
 
 type EventOrders struct {
-	Arg  ws.Args `json:"arg"`
-	Data []Order `json:"data"`
+	Arg  ws.Args  `json:"arg"`
+	Data []*Order `json:"data"`
 }
 
 type Order struct {
@@ -21,7 +21,7 @@ type Order struct {
 }
 
 // default subscribe
-func SubscribeOrders(args *ws.Args, auth common.Auth, handler HandlerOrders, handlerError ws.HandlerError) (*websocket.Conn, error) {
+func SubscribeOrders(args *ws.Args, auth *common.Auth, handler HandlerOrders, handlerError ws.HandlerError) (*websocket.Conn, error) {
 	args.Channel = "orders"
 
 	h := func(message []byte) {

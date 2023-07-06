@@ -27,10 +27,10 @@ type OpenInterest struct {
 
 // default subscribe
 func SubscribeOpenInterest(instId string, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
-	args := &ws.Args{
+	args := []*ws.Args{{
 		Channel: "open-interest",
 		InstId:  instId,
-	}
+	}}
 
 	h := func(message []byte) {
 		var event EventOpenInterest

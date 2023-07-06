@@ -7,8 +7,8 @@ type Auth struct {
 	Simulated  bool
 }
 
-func NewAuth(apiKey, secretKey, passphrase string, simulated bool) Auth {
-	return Auth{
+func NewAuth(apiKey, secretKey, passphrase string, simulated bool) *Auth {
+	return &Auth{
 		ApiKey:     apiKey,
 		SecretKey:  secretKey,
 		Passphrase: passphrase,

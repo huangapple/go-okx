@@ -13,10 +13,10 @@ import (
 )
 
 func TestBooks(t *testing.T) {
-	args := &ws.Args{
+	args := []*ws.Args{{
 		Channel: "books",
 		InstId:  "APT-USDC",
-	}
+	}}
 	handler := func(c interface{}) {
 		log.Println(c.(public.EventBooks))
 	}
@@ -44,10 +44,10 @@ func TestBooksCorrectness(t *testing.T) {
 }
 
 func TestProductions(t *testing.T) {
-	args := &ws.Args{
+	args := []*ws.Args{{
 		Channel:  "instruments",
 		InstType: "FUTURES",
-	}
+	}}
 	handler := func(c interface{}) {
 		log.Println(c.(public.EventProducts))
 	}
@@ -63,10 +63,10 @@ func TestProductions(t *testing.T) {
 func BooksCorrectnessHelper(instId string) {
 	LastBooks := public.Book{}
 	CurrentBooks := public.Book{}
-	args := &ws.Args{
+	args := []*ws.Args{{
 		Channel: "books",
 		InstId:  instId,
-	}
+	}}
 	handler := func(e interface{}) {
 		eventBooks := e.(public.EventBooks)
 		var t [][]string

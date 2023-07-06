@@ -48,7 +48,7 @@ type Product struct {
 }
 
 // default subscribe
-func SubscribeProducts(args *ws.Args, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
+func SubscribeProducts(args []*ws.Args, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
 
 	h := func(message []byte) {
 		var event EventProducts

@@ -40,10 +40,10 @@ type OptSummary struct {
 
 // default subscribe
 func SubscribeOptSummary(instFamily string, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
-	args := &ws.Args{
+	args := []*ws.Args{{
 		Channel:    "opt-summary",
 		InstFamily: instFamily,
-	}
+	}}
 
 	h := func(message []byte) {
 		var event EventOptSummary

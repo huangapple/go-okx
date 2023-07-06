@@ -26,8 +26,9 @@ type EstimatedPrice struct {
 }
 
 // default subscribe
-func SubscribeEstimatedPrice(args *ws.Args, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
-	args.Channel = "estimated-price"
+func SubscribeEstimatedPrice(args []*ws.Args, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
+
+	//args.Channel = "estimated-price"
 
 	h := func(message []byte) {
 		var event EventEstimatedPrice

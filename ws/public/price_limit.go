@@ -26,10 +26,10 @@ type PriceLimit struct {
 
 // default subscribe
 func SubscribePriceLimit(instId string, handler HandlerFunc, handlerError ws.HandlerError, simulated bool) (*websocket.Conn, error) {
-	args := &ws.Args{
+	args := []*ws.Args{{
 		Channel: "price-limit",
 		InstId:  instId,
-	}
+	}}
 
 	h := func(message []byte) {
 		var event EventPriceLimit

@@ -31,12 +31,12 @@ var (
 
 type Client struct {
 	Host string
-	Auth common.Auth
+	Auth *common.Auth
 	C    *http.Client
 }
 
 // new *Client
-func New(host string, auth common.Auth, c *http.Client) *Client {
+func New(host string, auth *common.Auth, c *http.Client) *Client {
 	if host == "" {
 		host = "https://www.okx.com"
 	}

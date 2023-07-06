@@ -11,7 +11,7 @@ type Operate struct {
 }
 
 // new subscribe
-func NewOperateSubscribe(args interface{}, handler Handler, handlerError HandlerError) *Operate {
+func NewOperateSubscribe(args []interface{}, handler Handler, handlerError HandlerError) *Operate {
 	return &Operate{
 		Request:      NewRequestSubscribe(args),
 		Handler:      handler,

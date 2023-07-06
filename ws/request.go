@@ -12,8 +12,8 @@ type Request struct {
 }
 
 // new request for subscribe
-func NewRequestSubscribe(args interface{}) *Request {
-	return NewRequest(OpSubscribe, args)
+func NewRequestSubscribe(args []interface{}) *Request {
+	return NewRequestArr(OpSubscribe, args)
 }
 
 // new request for login
@@ -25,5 +25,12 @@ func NewRequest(op string, args interface{}) *Request {
 	return &Request{
 		Op:   op,
 		Args: []interface{}{args},
+	}
+}
+
+func NewRequestArr(op string, args []interface{}) *Request {
+	return &Request{
+		Op:   op,
+		Args: args,
 	}
 }
