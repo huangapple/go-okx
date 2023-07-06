@@ -25,7 +25,7 @@ var (
 		"/api/v5/finance/staking-defi/offers",
 		"/api/v5/trade/orders-pending",
 		"/api/v5/trade/order",
-		"/api/v5/trade/order",
+		"/api/v5/trade/close-position",
 	}
 )
 

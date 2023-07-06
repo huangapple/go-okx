@@ -16,6 +16,7 @@ type PostClosePositionParam struct {
 	MgnMode string `json:"mgnMode"`
 	Ccy     string `json:"ccy,omitempty"`
 	AutoCxl bool   `json:"autoCxl,omitempty"`
+	Tag     string `json:"tag,omitempty"`
 }
 
 type PostClosePositionResponse struct {
